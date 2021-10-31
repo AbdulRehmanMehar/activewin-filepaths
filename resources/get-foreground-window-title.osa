@@ -1,0 +1,66 @@
+global frontApp, frontAppName, windowTitle, currentMessage, timeReceived, messageId, datee, draftId, draftSubject, draftContent, timeSent, wordDocName, wordDocModified, wordDocPath, wordDocReadOnly
+	set frontAppName to "NO_APP_FOUND"
+    set currentMessage to "empty"
+	set windowTitle to "NO_TITLE_FOUND"
+    set fmD to ""
+    set header to "empty"
+    set timeReceived to "empty"
+    set timeSent to "empty"
+    set draftId to ""
+    set draftSubject to ""
+    set draftContent to ""
+    set wordDocName to ""
+    set wordDocModified to ""
+    set wordDocPath to ""
+    set wordDocReadOnly to ""
+	try
+		tell application "System Events"
+			set frontApp to first application process whose frontmost is true
+			set frontAppName to name of frontApp
+            if frontAppName is "Microsoft Outlook"
+                    tell application "Microsoft Outlook"
+                          set currentMessage to selection
+                          if currentMessage ≠ "" and class of window 1 ≠ draft window then
+                              set timeReceived to time received of currentMessage
+                              set timeSent to time sent of currentMessage
+                              set dateIso to (timeReceived as «class isot» as string)
+                              set dateIsoSent to (timeSent as «class isot» as string)
+                              set timeReceived to dateIso
+                              set timeSent to dateIsoSent
+                          end if
+                          if class of window 1 is draft window then
+                            save window 1
+                            set myObjectID to id of (object of window 1)
+                            set draftId to myObjectID
+                            set draftSubject to subject of message id myObjectID
+                            set draftContent to plain text content of message id myObjectID
+                          end if
+                    end tell
+            end if
+            if frontAppName is "Microsoft Word"
+                tell application "Microsoft Word"
+                      set doc to active document
+                      set wordDocName to name of doc
+                      set props to properties of doc
+                      set wordDocModified to props
+                      set wordDocPath to file of doc
+                      set wordDocReadOnly to read only of props
+                end tell
+            end if
+			tell process frontAppName
+				if exists (1st window whose value of attribute "AXMain" is true) then
+					tell (1st window whose value of attribute "AXMain" is true)
+						set windowTitle to value of attribute "AXTitle"
+                        set fmD to value of attribute "AXDocument"
+					end tell
+				end if
+			end tell
+		end tell
+	on error errorMsg
+		set windowTitle to errorMsg
+	end try
+    
+	set output to (frontAppName & "," & windowTitle & "," & fmD)
+	log output
+    
+return {frontAppName, windowTitle, fmD, currentMessage, timeReceived, draftId, draftSubject, draftContent, timeSent, wordDocName, wordDocModified, wordDocPath, wordDocReadOnly}
