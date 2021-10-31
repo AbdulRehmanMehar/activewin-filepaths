@@ -18,5 +18,8 @@
   },
   "author": "Abdul Rehman <mehars.6925@gmail.com> (https://www.upwork.com/freelancers/~010d76b8839f89f4a3)",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "node-osascript": "^2.1.0"
+  }
 }
