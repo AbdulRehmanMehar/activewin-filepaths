@@ -1,0 +1,22 @@
+{
+  "name": "activewin-filepaths",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/AbdulRehmanMehar/activewin-filepath",
+  "bugs": {
+    "url": "https://github.com/AbdulRehmanMehar/activewin-filepath/issues",
+    "email": "mehars.6925@gmail.com"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AbdulRehmanMehar/activewin-filepath.git"
+  },
+  "author": "Abdul Rehman <mehars.6925@gmail.com> (https://www.upwork.com/freelancers/~010d76b8839f89f4a3)",
+  "license": "MIT",
+  "private": false
+}
