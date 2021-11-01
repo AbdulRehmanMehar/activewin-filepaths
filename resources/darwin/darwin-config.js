@@ -36,7 +36,7 @@ let getJetBrainsProducts = async () => {
     return returnable;
 }
 
-export let enableAXDocumentForJetBrains = async () => {
+let enableAXDocumentForJetBrains = async () => {
     let config;
     let products = await getJetBrainsProducts();
 
@@ -94,7 +94,11 @@ export let enableAXDocumentForJetBrains = async () => {
     }
 }
 
-export let enableAXDocumentForVsCode = async () => {
+let enableAXDocumentForVsCode = async () => {
     await runCommand(`'/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code' --install-extension YoshinoriN.current-file-path`)
 }
 
+module.exports = {
+    enableAXDocumentForVsCode,
+    enableAXDocumentForJetBrains,
+}
