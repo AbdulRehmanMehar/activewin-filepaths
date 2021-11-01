@@ -20,6 +20,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "node-osascript": "^2.1.0"
+    "node-osascript": "^2.1.0",
+    "xml2js": "^0.4.23"
   }
 }
